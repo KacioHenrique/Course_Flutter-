@@ -28,7 +28,10 @@ class TransactionForm extends StatelessWidget {
           ElevatedButton(
             onPressed: () => _popTransaction(context),
             child: const Text("ADD"),
-          )
+          ),
+          const FittedBox(
+            child: Text('Some Example Text.'),
+          ),
         ],
       ),
     );

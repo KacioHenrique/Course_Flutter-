@@ -1,4 +1,3 @@
-
 class Transaction {
   final String name;
 

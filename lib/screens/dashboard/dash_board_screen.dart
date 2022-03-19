@@ -1,3 +1,4 @@
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -5,13 +6,17 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: DashboardCard(),
+        child: DashboardCard("dolar", CardIcons.dolar),
       ),
     );
   }
 }
 
 class DashboardCard extends StatelessWidget {
+  final String _description;
+  final CardIcons _icon;
+
+  DashboardCard(this._description, this._icon);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,24 +25,19 @@ class DashboardCard extends StatelessWidget {
       width: 100,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(21),
-        color: Colors.purple[600],
+        color: const Color(0xFF9500F6),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Align(
-            // child: Icon(
-            //   Icons.agriculture_rounded,
-            //   size: 24,
-            //   color: Colors.white,
-            // ),
-            child: Image.asset('assets/images/pix_icon.png'),
+            child: DashboardCardIcons.getIcon(_icon),
             alignment: Alignment.topLeft,
           ),
           Align(
               child: Text(
-                "pay",
-                style: TextStyle(
+                _description,
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
@@ -46,5 +46,17 @@ class DashboardCard extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+enum CardIcons {
+  dolar
+}
+class DashboardCardIcons {
+  static Widget getIcon(CardIcons type) {
+    switch(type) {
+      case CardIcons.dolar:
+        return SvgPicture.asset('images/dolar_icon.svg');
+    }
   }
 }

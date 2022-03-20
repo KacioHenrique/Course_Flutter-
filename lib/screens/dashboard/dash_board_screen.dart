@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../components/ds_icon.dart';
+import '../transaction_list/transaction_list_screen.dart';
 import 'components/dashboard_card.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -15,13 +16,20 @@ class DashboardScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(8, 30, 8, 8),
           ),
           Padding(
-            child: DashboardCard("dolar", Ds_icons.dolar),
+            child: DashboardCard("dolar", Ds_icons.dolar, () => navigateTo(context)),
             padding: const EdgeInsets.all(8),
           )
         ],
       ),
     );
   }
+
+  void navigateTo(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TransactionListScreen(),
+      ),
+    );
+  }
 }
-
-

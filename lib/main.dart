@@ -1,7 +1,4 @@
 import 'package:course_alura_flutter/screens/dashboard/dash_board_screen.dart';
-import 'package:course_alura_flutter/screens/transaction_form/components/transaction_form.dart';
-import 'package:course_alura_flutter/screens/transaction_form/transaction_form_screen.dart';
-import 'package:course_alura_flutter/screens/transaction_list/transaction_list_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,6 +10,9 @@ class ByteBankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DashboardScreen(),
+      theme: ThemeData(scaffoldBackgroundColor: const Color(0xFF820AD1),
+        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF820AD1), ),
+      ),
     );
   }
 }

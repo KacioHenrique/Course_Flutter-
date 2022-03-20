@@ -12,7 +12,6 @@ class TransactionListScreen extends StatefulWidget {
 }
 
 class _TransactionListScreen extends State<TransactionListScreen>{
-
   final List<Transaction> transactions = [];
 
   @override
@@ -20,11 +19,11 @@ class _TransactionListScreen extends State<TransactionListScreen>{
     debugPrint("building the state");
     return Scaffold(
       appBar: AppBar(
-        title: Text("Transactions"),
+        title: const Text("Transactions"),
       ),
       body: TransactionList(transactions),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () => _pushListScreen(context),
       ),
     );
@@ -37,13 +36,9 @@ class _TransactionListScreen extends State<TransactionListScreen>{
 
   void _addToTheList(Transaction value) {
     debugPrint(value.toString());
-    debugPrint("about to add something to the transaction");
     setState(() {
-      debugPrint("set state begin");
       transactions.add(value);
-      debugPrint("setState after ${transactions.toString()}");
     });
-    debugPrint("addToTheList after ${transactions.toString()}");
   }
 
 }

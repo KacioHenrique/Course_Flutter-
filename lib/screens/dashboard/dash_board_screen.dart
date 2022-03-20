@@ -1,62 +1,27 @@
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import '../../components/ds_icon.dart';
+import 'components/dashboard_card.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: DashboardCard("dolar", CardIcons.dolar),
-      ),
-    );
-  }
-}
-
-class DashboardCard extends StatelessWidget {
-  final String _description;
-  final CardIcons _icon;
-
-  DashboardCard(this._description, this._icon);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(18, 21, 18, 4),
-      height: 127,
-      width: 100,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(21),
-        color: const Color(0xFF9500F6),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Align(
-            child: DashboardCardIcons.getIcon(_icon),
-            alignment: Alignment.topLeft,
+          Padding(
+            child: Image.asset("images/dashBoard.png"),
+            padding: const EdgeInsets.fromLTRB(8, 30, 8, 8),
           ),
-          Align(
-              child: Text(
-                _description,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              alignment: Alignment.bottomLeft),
+          Padding(
+            child: DashboardCard("dolar", Ds_icons.dolar),
+            padding: const EdgeInsets.all(8),
+          )
         ],
       ),
     );
   }
 }
 
-enum CardIcons {
-  dolar
-}
-class DashboardCardIcons {
-  static Widget getIcon(CardIcons type) {
-    switch(type) {
-      case CardIcons.dolar:
-        return SvgPicture.asset('images/dolar_icon.svg');
-    }
-  }
-}
+

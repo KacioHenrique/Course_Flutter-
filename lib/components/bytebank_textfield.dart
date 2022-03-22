@@ -24,7 +24,7 @@ class _ByteBankTextFieldState extends State<ByteBankTextField> {
       child: TextField(
         controller: widget._controller,
         keyboardType: widget.keyboardType,
-        style: const TextStyle(fontSize: 24),
+        style: const TextStyle(fontSize: 24, color: Colors.white),
         decoration: InputDecoration(
           icon: widget.icon,
           labelText: widget._label,

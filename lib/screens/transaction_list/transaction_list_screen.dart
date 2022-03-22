@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'package:course_alura_flutter/data_Base/DataBaseManagerTransaction.dart';
 import 'package:course_alura_flutter/screens/transaction_form/transaction_form_screen.dart';
 import 'package:flutter/material.dart';
 import '../../models/transaction.dart';
 import 'components/transaction_list.dart';
 
 class TransactionListScreen extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() {
     return _TransactionListScreen();
@@ -12,16 +14,13 @@ class TransactionListScreen extends StatefulWidget {
 }
 
 class _TransactionListScreen extends State<TransactionListScreen>{
-  final List<Transaction> transactions = [];
-
   @override
   Widget build(BuildContext context) {
-    debugPrint("building the state");
     return Scaffold(
       appBar: AppBar(
         title: const Text("Transactions"),
       ),
-      body: TransactionList(transactions),
+      body: TransactionList(),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () => _pushListScreen(context),
@@ -29,16 +28,14 @@ class _TransactionListScreen extends State<TransactionListScreen>{
     );
   }
 
-  void _pushListScreen(BuildContext context) {
-    final Future result = Navigator.push(context, MaterialPageRoute(builder: (context) => TransactionFormScreen(),));
-    result.then((value) => _addToTheList(value));
+  void _pushListScreen(BuildContext context) async {
+    await Navigator.push(context, MaterialPageRoute(builder: (context) => TransactionFormScreen(),));
+    _addToTheList();
   }
 
-  void _addToTheList(Transaction value) {
-    debugPrint(value.toString());
+  void _addToTheList() {
     setState(() {
-      transactions.add(value);
+      debugPrint("here _addToTheList");
     });
   }
-
 }

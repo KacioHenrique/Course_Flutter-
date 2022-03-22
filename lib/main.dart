@@ -1,7 +1,9 @@
+import 'package:course_alura_flutter/data_Base/DataBaseManagerTransaction.dart';
 import 'package:course_alura_flutter/screens/dashboard/dash_board_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  DataBaseManagerTransaction().createTable();
   runApp(ByteBankApp());
 }
 
@@ -10,8 +12,20 @@ class ByteBankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DashboardScreen(),
-      theme: ThemeData(scaffoldBackgroundColor: const Color(0xFF820AD1),
-        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF820AD1), ),
+      theme: ThemeData(
+        primarySwatch: Colors.grey,
+        scaffoldBackgroundColor: const Color(0xFF820AD1),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF820AD1),
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Color(0xFF9500F6),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: const Color(0xFF9500F6),
+          ),
+        ),
       ),
     );
   }

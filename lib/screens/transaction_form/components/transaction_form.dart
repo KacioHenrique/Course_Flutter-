@@ -1,12 +1,13 @@
+import 'package:course_alura_flutter/data_Base/DataBaseManagerTransaction.dart';
 import 'package:flutter/material.dart';
-
 import '../../../components/bytebank_textfield.dart';
 import '../../../models/transaction.dart';
 
 class TransactionForm extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
-
+  final database = DataBaseManagerTransaction();
+  
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -25,22 +26,28 @@ class TransactionForm extends StatelessWidget {
             TextInputType.number,
             icon: const Icon(Icons.monetization_on),
           ),
-          ElevatedButton(
-            onPressed: () => _popTransaction(context),
-            child: const Text("ADD"),
-          ),
-          const FittedBox(
-            child: Text('Some Example Text.'),
-          ),
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: ElevatedButton(
+              onPressed: () => _popTransaction(context),
+              child: const Text("ADD"),
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(
+                  const Size(double.infinity, 50),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 
-  _popTransaction(BuildContext context) {
+  _popTransaction(BuildContext context) async {
     final name = _nameController.text;
     final amount = double.parse(_amountController.text);
-    final transaction = Transaction(name, amount);
-    Navigator.pop(context, transaction);
+    final transaction = TransactionModel(name, amount, UniqueKey().toString());
+    await database.insertInTable(transaction);
+    Navigator.pop(context);
   }
 }

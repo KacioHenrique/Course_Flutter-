@@ -1,3 +1,4 @@
+import 'package:course_alura_flutter/data_Base/DataBaseManagerTransaction.dart';
 import 'package:flutter/material.dart';
 import '../../components/ds_icon.dart';
 import '../transaction_list/transaction_list_screen.dart';
@@ -24,7 +25,7 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  void navigateTo(BuildContext context) {
+  void navigateTo(BuildContext context) async {
     Navigator.push(
       context,
       MaterialPageRoute(

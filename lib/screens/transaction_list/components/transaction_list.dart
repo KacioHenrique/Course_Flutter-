@@ -9,20 +9,33 @@ class TransactionList extends StatelessWidget {
     return FutureBuilder(
       future: DataBaseManagerTransaction().fetchTransactionModel(),
       builder: (context, AsyncSnapshot<List<TransactionModel>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+        switch (snapshot.connectionState) {
+          case ConnectionState.none: break;
+          case ConnectionState.waiting:
+            return loadScreen();
+          case ConnectionState.active:
+            return loadScreen();
+          case ConnectionState.done:
+            return ListView.builder(
+              padding: const EdgeInsets.all(16.0),
+              itemCount: snapshot.data?.length,
+              itemBuilder: (BuildContext context, int index) {
+                return TransactionListItem(snapshot.data![index]);
+              },
+            );
         }
-        else if (snapshot.connectionState == ConnectionState.done) {
-          return ListView.builder(
-            padding: const EdgeInsets.all(16.0),
-            itemCount: snapshot.data?.length,
-            itemBuilder: (BuildContext context, int index) {
-              return TransactionListItem(snapshot.data![index]);
-            },
-          );
-        }
-        return Container();
+        return const Text("Error in connection");
       },
+    );
+  }
+
+  Widget loadScreen() {
+    return Center(
+      child: Container(
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.black,
+        ),
+      ),
     );
   }
 }

@@ -2,8 +2,10 @@ import 'package:course_alura_flutter/data_Base/DataBaseManagerTransaction.dart';
 import 'package:course_alura_flutter/screens/dashboard/dash_board_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  DataBaseManagerTransaction().createTable();
+import 'Service/Api.dart';
+
+void main() async {
+ await ApiUserCase().findALL();
   runApp(ByteBankApp());
 }
 

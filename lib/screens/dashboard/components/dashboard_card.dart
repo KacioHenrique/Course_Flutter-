@@ -23,33 +23,36 @@ class _DashBoardCardState extends State<DashboardCard> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      padding: const EdgeInsets.fromLTRB(18, 21, 18, 4),
-      height: 127,
-      width: 100,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(21),
-        color: const Color(0xFF9500F6),
-      ),
-      duration: const Duration(seconds: 1),
-      child: InkWell(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Default_icons.getIcon(_icon),
-            Text(
-              _description,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: AnimatedContainer(
+        padding: const EdgeInsets.fromLTRB(18, 21, 18, 4),
+        height: 127,
+        width: 100,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(21),
+          color: const Color(0xFF9500F6),
         ),
-        onTap: () => setState(() {
-          _onTap();
-        }),
+        duration: const Duration(seconds: 1),
+        child: InkWell(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Default_icons.getIcon(_icon),
+              Text(
+                _description,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          onTap: () => setState(() {
+            _onTap();
+          }),
+        ),
       ),
     );
   }

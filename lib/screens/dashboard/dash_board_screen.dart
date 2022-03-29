@@ -16,10 +16,12 @@ class DashboardScreen extends StatelessWidget {
             child: Image.asset("images/dashBoard.png"),
             padding: const EdgeInsets.fromLTRB(8, 30, 8, 8),
           ),
-          Padding(
-            child: DashboardCard("dolar", Ds_icons.dolar, () => navigateTo(context)),
-            padding: const EdgeInsets.all(8),
-          )
+          Row(
+            children: [
+              DashboardCard("contacts", Ds_icons.contact, () => navigateTo(context)),
+              DashboardCard("Receive", Ds_icons.dolar, () {} )
+            ],
+          ),
         ],
       ),
     );
@@ -29,7 +31,7 @@ class DashboardScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TransactionListScreen(),
+        builder: (context) =>  const TransactionListScreen(textString: 'Contacts',),
       ),
     );
   }

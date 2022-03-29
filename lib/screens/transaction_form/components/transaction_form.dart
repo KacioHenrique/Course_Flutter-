@@ -1,13 +1,13 @@
 import 'package:course_alura_flutter/data_Base/DataBaseManagerTransaction.dart';
 import 'package:flutter/material.dart';
 import '../../../components/bytebank_textfield.dart';
-import '../../../models/transaction.dart';
+import '../../../models/transactionModel.dart';
 
 class TransactionForm extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _amountController = TextEditingController();
-  final database = DataBaseManagerTransaction();
-  
+  final TextEditingController _accountNumberController = TextEditingController();
+  final database = DataBaseManagerAccount();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -20,9 +20,9 @@ class TransactionForm extends StatelessWidget {
             TextInputType.name,
           ),
           ByteBankTextField(
-            _amountController,
-            "Amount",
-            "0.00",
+            _accountNumberController,
+            "Number",
+            "995550252",
             TextInputType.number,
             icon: const Icon(Icons.monetization_on),
           ),
@@ -45,8 +45,8 @@ class TransactionForm extends StatelessWidget {
 
   _popTransaction(BuildContext context) async {
     final name = _nameController.text;
-    final amount = double.parse(_amountController.text);
-    final transaction = TransactionModel(name, amount, UniqueKey().toString());
+    final accountNumber = int.parse(_accountNumberController.text);
+    final transaction = Contact(name, accountNumber);
     await database.insertInTable(transaction);
     Navigator.pop(context);
   }

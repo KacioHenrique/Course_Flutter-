@@ -1,14 +1,16 @@
-import 'package:course_alura_flutter/data_Base/DataBaseManagerTransaction.dart';
-import 'package:course_alura_flutter/screens/transaction_list/components/transaction_list_item.dart';
+import 'package:course_alura_flutter/components/bank_app_list_item.dart';
 import 'package:flutter/material.dart';
-import '../../../models/transaction.dart';
 
-class TransactionList extends StatelessWidget {
+class BankFetchList<T> extends StatelessWidget {
+  final Layout<T> cardItem;
+  final Future<List<T>> future;
+  BankFetchList(this.cardItem, this.future);
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: DataBaseManagerTransaction().fetchTransactionModel(),
-      builder: (context, AsyncSnapshot<List<TransactionModel>> snapshot) {
+    return FutureBuilder<List<T>>(
+      future: future,
+      builder: (context, AsyncSnapshot<List<T>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none: break;
           case ConnectionState.waiting:
@@ -20,7 +22,7 @@ class TransactionList extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               itemCount: snapshot.data?.length,
               itemBuilder: (BuildContext context, int index) {
-                return TransactionListItem(snapshot.data![index]);
+                return cardItem.makeLayout(snapshot.data![index]);
               },
             );
         }
@@ -30,12 +32,11 @@ class TransactionList extends StatelessWidget {
   }
 
   Widget loadScreen() {
-    return Center(
-      child: Container(
-        child: CircularProgressIndicator(
-          backgroundColor: Colors.black,
-        ),
+    return const Center(
+      child: CircularProgressIndicator(
+        backgroundColor: Colors.black,
       ),
     );
   }
 }
+

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/transaction.dart';
+import '../../models/transactionModel.dart';
 import '../../components/bytebank_textfield.dart';
 import 'components/transaction_form.dart';
 

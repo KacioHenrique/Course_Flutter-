@@ -3,9 +3,9 @@ import 'package:course_alura_flutter/screens/dashboard/dash_board_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'Service/Api.dart';
+import 'models/transactionModel.dart';
 
 void main() async {
- await ApiUserCase().findALL();
   runApp(ByteBankApp());
 }
 

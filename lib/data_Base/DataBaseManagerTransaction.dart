@@ -38,7 +38,7 @@ class DataBaseManagerAccount {
   Future<int> insertInTable(Contact transaction) async {
     final Database database = await open();
     int result =
-        await database.insert('contacts', transaction.toMap());
+        await database.insert('contacts', transaction.encode());
     return result;
   }
 

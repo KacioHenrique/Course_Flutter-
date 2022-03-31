@@ -1,4 +1,4 @@
-class Contact {
+class Contact extends Encode {
   final String name;
   final int accountNumber;
 
@@ -13,7 +13,8 @@ class Contact {
     return "$name $accountNumber";
   }
 
-  Map<String, dynamic> toMap() {
+  @override
+  Map<String, dynamic> encode() {
     return {
       'accountNumber': accountNumber,
       'name': name
@@ -21,7 +22,7 @@ class Contact {
   }
 }
 
-class TransactionFeed {
+class TransactionFeed extends Encode {
   final String id;
   final double value;
   final Contact contact;
@@ -36,6 +37,17 @@ class TransactionFeed {
   String toString() {
     return "$id $value " + contact.toString();
   }
+
+  @override
+  Map<String, dynamic> encode() {
+    return {
+      'id': id,
+       'value': value,
+        'contact': contact.encode()
+    };
+  }
 }
 
-
+abstract class Encode {
+  Map<String, dynamic> encode();
+}

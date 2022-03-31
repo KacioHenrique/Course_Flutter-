@@ -1,36 +1,42 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
-import 'package:sqflite/sqflite.dart';
-
 import '../models/transactionModel.dart';
 
-class ApiUserCase {
-  final String _baseUrl = "http://192.168.0.8:8080/";
+class Api {
+  final Uri _url = Uri.http("192.168.0.8:8080", "transactions");
+  final int _timeOut = 5;
 
   Future<List<TransactionFeed>> findALL() async {
     final List<TransactionFeed> result = [];
-    final path = _baseUrl + "transactions";
-    final Uri url = Uri.http("192.168.0.8:8080", "transactions");
-    final Response response = await get(url);
+    final Response response =
+        await get(_url).timeout(Duration(seconds: _timeOut));
     List<dynamic> decodeJson = jsonDecode(response.body);
+    return _convertInTransaction(decodeJson, result);
+  }
 
-    for (Map<String, dynamic> element in decodeJson) {
-      Map<String, dynamic> contactMap = element['contact'];
-      result.add(
-        TransactionFeed(
-          element['id'],
-          element['value'],
-          Contact(
-            contactMap['name'],
-            contactMap['accountNumber'],
-          ),
-        ),
-      );
-    }
+  List<TransactionFeed> _convertInTransaction(
+      List<dynamic> decodeJson, List<TransactionFeed> result) {
+    List<TransactionFeed> result = decodeJson.map(
+      (dynamic element) {
+        return TransactionFeed.fromJson(element);
+      },
+    ).toList();
 
-    print(result);
     return result;
+  }
+
+  Future<TransactionFeed?> save(TransactionFeed transaction) async {
+    final headers = {'password': '1000', 'Content-type': 'application/json'};
+    final Map<String, dynamic> modelEncode = transaction.encode();
+    final String bodyEncode = jsonEncode(modelEncode);
+    Response response = await post(
+      _url,
+      body: bodyEncode,
+      headers: headers,
+    );
+
+    if (response.statusCode == 200) {
+      return transaction;
+    }
   }
 }

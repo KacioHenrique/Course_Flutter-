@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../models/transactionModel.dart';
 import '../../components/bytebank_textfield.dart';
-import 'components/transaction_form.dart';
+import 'components/contact_form.dart';
 
-class TransactionFormScreen extends StatelessWidget {
+class ContactFormScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("New transaction"),
+        title: const Text("New Contact"),
       ),
-      body: TransactionForm(),
+      body: ContactForm(),
     );
   }
 }

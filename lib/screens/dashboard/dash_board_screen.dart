@@ -1,6 +1,6 @@
-import 'package:course_alura_flutter/data_Base/DataBaseManagerTransaction.dart';
 import 'package:flutter/material.dart';
 import '../../components/ds_icon.dart';
+import '../contact_list/contact_list_screen.dart';
 import '../transaction_list/transaction_list_screen.dart';
 import 'components/dashboard_card.dart';
 
@@ -19,7 +19,7 @@ class DashboardScreen extends StatelessWidget {
           Row(
             children: [
               DashboardCard("contacts", Ds_icons.contact, () => navigateTo(context)),
-              DashboardCard("Receive", Ds_icons.dolar, () {} )
+              DashboardCard("Receive", Ds_icons.dolar, () => navigateToTransaction(context))
             ],
           ),
         ],
@@ -27,11 +27,19 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
+  void navigateToTransaction(BuildContext context) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>  const TransactionListScreen(),
+      ),
+    );
+  }
   void navigateTo(BuildContext context) async {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>  const TransactionListScreen(textString: 'Contacts',),
+        builder: (context) =>  const ContactListScreen(textString: 'Contacts',),
       ),
     );
   }

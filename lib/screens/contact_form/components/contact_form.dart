@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../components/bytebank_textfield.dart';
 import '../../../models/transactionModel.dart';
 
-class TransactionForm extends StatelessWidget {
+class ContactForm extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _accountNumberController = TextEditingController();
   final database = DataBaseManagerAccount();
@@ -27,7 +27,7 @@ class TransactionForm extends StatelessWidget {
             icon: const Icon(Icons.monetization_on),
           ),
           Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: ElevatedButton(
               onPressed: () => _popTransaction(context),
               child: const Text("ADD"),

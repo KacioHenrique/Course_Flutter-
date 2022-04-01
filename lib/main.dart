@@ -1,9 +1,6 @@
-import 'package:course_alura_flutter/data_Base/DataBaseManagerTransaction.dart';
 import 'package:course_alura_flutter/screens/dashboard/dash_board_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'Service/Api.dart';
-import 'models/transactionModel.dart';
+import 'components/BankAlertDialogAuth.dart';
 
 void main() async {
   runApp(ByteBankApp());
@@ -13,7 +10,6 @@ class ByteBankApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: DashboardScreen(),
       theme: ThemeData(
         primarySwatch: Colors.grey,
         scaffoldBackgroundColor: const Color(0xFF820AD1),
@@ -29,6 +25,7 @@ class ByteBankApp extends StatelessWidget {
           ),
         ),
       ),
+      home: DashboardScreen(),
     );
   }
 }

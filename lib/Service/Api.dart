@@ -25,8 +25,8 @@ class Api {
     return result;
   }
 
-  Future<TransactionFeed?> save(TransactionFeed transaction) async {
-    final headers = {'password': '1000', 'Content-type': 'application/json'};
+  Future<TransactionFeed?> save(TransactionFeed transaction, String password) async {
+    final headers = {'password': password, 'Content-type': 'application/json'};
     final Map<String, dynamic> modelEncode = transaction.encode();
     final String bodyEncode = jsonEncode(modelEncode);
     Response response = await post(

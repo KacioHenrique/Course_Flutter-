@@ -3,40 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:course_alura_flutter/models/transactionModel.dart';
 
 class BankAppListItemContact<Contact> implements Layout {
+  final Function(Contact) onClick;
+
+  BankAppListItemContact(this.onClick);
+
   @override
   Widget makeLayout(model) {
     return Card(
-      child: ListTile(
-        leading: const Icon(Icons.contact_phone),
-        title: Text(model.name),
-        subtitle: Text("${model.accountNumber}"),
-      ),
-    );
-  }
-
-  @override
-  void tap(model) {}
-}
-
-
-class BankAppListItemTransactionFeed<TransactionFeed> implements Layout {
-  final Function(TransactionFeed) onClick;
-
-  BankAppListItemTransactionFeed({required this.onClick});
-
-  @override
-  Widget makeLayout(model) {
-    return InkWell(
-      child: Card(
+      child: InkWell(
         child: ListTile(
-          leading: Default_icons.getIcon(Ds_icons.dolar),
-          title: Text(model.contact.name),
-          subtitle: Text("R\$  ${model.value}"),
+          leading: const Icon(Icons.contact_phone),
+          title: Text(model.name),
+          subtitle: Text("${model.accountNumber}"),
         ),
+        onTap: () {
+          tap(model);
+        },
       ),
-      onTap: () {
-        tap(model);
-      },
     );
   }
 
@@ -44,6 +27,24 @@ class BankAppListItemTransactionFeed<TransactionFeed> implements Layout {
   void tap(model) {
     onClick(model);
   }
+}
+
+
+class BankAppListItemTransactionFeed<TransactionFeed> implements Layout {
+  @override
+  Widget makeLayout(model) {
+    return Card(
+        child: ListTile(
+          leading: Default_icons.getIcon(Ds_icons.dolar),
+          title: Text(model.contact.name),
+          subtitle: Text("R\$  ${model.value}"),
+        ),
+      );
+  }
+
+  @override
+  void tap(model) {}
+
 }
 
 

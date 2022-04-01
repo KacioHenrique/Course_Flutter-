@@ -14,19 +14,8 @@ class TransactionListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BankFetchList(
-        BankAppListItemTransactionFeed(onClick: (transactionFeed) {
-          pushFormScreen(context, transactionFeed as TransactionFeed);
-        }),
+        BankAppListItemTransactionFeed(),
         Api().findALL(),
-      ),
-    );
-  }
-
-  void pushFormScreen(BuildContext context, TransactionFeed transactionFeed) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => TransactionForm(transactionFeed.contact),
       ),
     );
   }
